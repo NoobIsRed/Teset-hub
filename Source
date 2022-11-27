@@ -3,6 +3,7 @@
 
 -- Values
 _G.FullBright.Value = true
+
 -- Function
 function FullBrightChain()
 	loadstring(game:HttpGet("https://pastebin.com/raw/06iG6YkU", true))()
@@ -24,5 +25,3 @@ Main:AddToggle({
 		FullBrightChain()
 	end    
 })
-
-OrionLib:Init()
