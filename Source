@@ -1,17 +1,53 @@
  local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
  local Window = OrionLib:MakeWindow({Name = "Chain", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
+-- Values
+_G.FullBright.Value = true
+-- Function
+function FullBrightChain()
+pcall(function()
+	local lighting = game:GetService("Lighting");
+	lighting.Ambient = Color3.fromRGB(255, 255, 255);
+	lighting.Brightness = 1;
+	lighting.FogEnd = 1e10;
+	for i, v in pairs(lighting:GetDescendants()) do
+		if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
+			v.Enabled = false;
+		end;
+	end;
+	lighting.Changed:Connect(function()
+		lighting.Ambient = Color3.fromRGB(255, 255, 255);
+		lighting.Brightness = 1;
+		lighting.FogEnd = 1e10;
+	end);
+	spawn(function()
+		local character = game:GetService("Players").LocalPlayer.Character;
+		while wait() do
+			repeat wait() until character ~= nil;
+			if not character.HumanoidRootPart:FindFirstChildWhichIsA("PointLight") then
+				local headlight = Instance.new("PointLight", character.HumanoidRootPart);
+				headlight.Brightness = 1;
+				headlight.Range = 60;
+			end;
+		end;
+	end);
+end)
+end
+
+-- Tabs
 local Main = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
+-- Toggles
 Main:AddToggle({
-	Name = "FullBright",
+	Name = "Full Bright",
 	Default = false,
 	Callback = function(Value)
-		print(Value)
+		_G.FullBright == Value
+		FullBrightChain()
 	end    
 })
 
