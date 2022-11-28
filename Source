@@ -1,51 +1,27 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Welcome To Tester Script!", HidePremium = false, IntroEnabled = false,IntroText = "Tester Hub",  SaveConfig = true, ConfigFolder = "OrionTest"})
+-- Tester Hub
 
-_G.Buy = true
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/slf0Dev/Ocerium_Project/main/Library.lua"))()
+window = Library.Main("Tester Hub","LeftAlt") -- change "LeftAlt" to key that you want will hide gui
+local Tab = window.NewTab("Menu")
+local Section = Tab.NewSection("Main")
 
-function  buyfood()
-	while _G.Buy == true do
-		local ohString1 = "Floppa Food"
-local ohString2 = "the_interwebs"
-game:GetService("ReplicatedStorage").Events.Unlock:FireServer(ohString1, ohString2)
-	end
-end
+-- Buttons
+local Button = Section.NewButton("Tester",function()
+    local ohString1 = "Floppa Food"
+    local ohString2 = "the_interwebs"
+    game:GetService("ReplicatedStorage").Events.Unlock:FireServer(ohString1, ohString2)
+end)
 
--- Tabs
-local Main = Window:MakeTab({
-   Name = "Main",
-   Icon = "rbxassetid://4483345998",
-   PremiumOnly = false
-})
+local SliderPrecise = Section.NewSlider("WalkSpeed",0,100,true,function(value)
+local Players = game.Players.LocalPlayer
+local Character = Players.Character
+local Humanoid = Character.Humanoid
+Humanoid.WalkSpeed = value
+end,0)
 
-local Misc = Window:MakeTab({
-   Name = "Misc",
-   Icon = "rbxassetid://4483345998",
-   PremiumOnly = false
-})
-
--- Toggles
-Main:AddToggle({
-   Name = "Auto Click",
-   Default = false,
-   Callback = function(Value)
-      print(Value)
-   end    
-})
-
-Main:AddToggle({
-    Name = "Buy Food",
-   Default = false,
-   Callback = function(Value)
-      _G.Buy = true
-	  buyfood()
-   end
-})
-
-Misc:AddToggle({
-   Name = "COMING SOON"
-   Default = false,
-   Callback = function(Value)
-      print(Value)
-   end
-})
+local JumpPower = Section.NewSlider("WalkSpeed",0,100,true,function(value)
+local Players = game.Players.LocalPlayer
+local Character = Players.Character
+local Humanoid = Character.Humanoid
+Humanoid.JumpPower = value
+end,0)
