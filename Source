@@ -1,27 +1,51 @@
- local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
- local Window = OrionLib:MakeWindow({Name = "Chain", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Welcome To Tester Script!", HidePremium = false, IntroEnabled = false,IntroText = "Tester Hub",  SaveConfig = true, ConfigFolder = "OrionTest"})
 
--- Values
-_G.FullBright.Value = true
+_G.Buy = true
 
--- Function
-function FullBrightChain()
-	loadstring(game:HttpGet("https://pastebin.com/raw/06iG6YkU", true))()
+function  buyfood()
+	while _G.Buy == true do
+		local ohString1 = "Floppa Food"
+local ohString2 = "the_interwebs"
+game:GetService("ReplicatedStorage").Events.Unlock:FireServer(ohString1, ohString2)
+	end
 end
 
 -- Tabs
 local Main = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+   Name = "Main",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Misc = Window:MakeTab({
+   Name = "Misc",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
 })
 
 -- Toggles
 Main:AddToggle({
-	Name = "Full Bright",
-	Default = false,
-	Callback = function(Value)
-		_G.FullBright == Value
-		FullBrightChain()
-	end    
+   Name = "Auto Click",
+   Default = false,
+   Callback = function(Value)
+      print(Value)
+   end    
+})
+
+Main:AddToggle({
+    Name = "Buy Food",
+   Default = false,
+   Callback = function(Value)
+      _G.Buy = true
+	  buyfood()
+   end
+})
+
+Misc:AddToggle({
+   Name = "COMING SOON"
+   Default = false,
+   Callback = function(Value)
+      print(Value)
+   end
 })
